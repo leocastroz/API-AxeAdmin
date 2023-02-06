@@ -17,7 +17,7 @@ export class AuthController {
 
         if (!username || !password) throw new ResponseHttpError("Usuario e/ou Senha não informados.", 401)
 
-        const found_user = await User.findOne({ username: username })
+        const found_user = await User.findOne({ username: username.toLowerCase() })
         if (!found_user) throw new ResponseHttpError("Usuario e/ou Senha Invalidos.", 401)
 
         const isValidPassword = await PasswordFactory.compareHash(password, found_user.password)
