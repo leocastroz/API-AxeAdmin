@@ -9,21 +9,7 @@ export class AuthController {
 
     async get(req: Request, res: Response) {
 
-        const password = "12345"
-
-        const password_hash = await PasswordFactory.generateHash(password)
-
-        const usuario = new User({
-            name: "Matheus Oliveira Fernandes Ribeiro",
-            email: "email@gmail.com",
-            username: "matheusvp2",
-            password: password_hash
-        })
-
-        const dados = await User.create(usuario)
-
-
-        return res.json({ message: "Rota de Usuario OK", dados })
+        return res.json({ message: "Rota de Autenticação, vamos aprender a utilizar o capeta do Axios." })
     }
 
     async auth(req: Request, res: Response) {
