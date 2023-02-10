@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import { ResponseHttpError } from "../errors";
 import User from "../models/User";
+import { PasswordFactory } from "../helpers/PasswordFactory";
 
 export class RegisterController {
 
@@ -13,11 +14,13 @@ export class RegisterController {
 
         if (!name || !email || !username || !password) throw new ResponseHttpError("Campos necessarios não informados.", 400)
 
+        const hash_password = PasswordFactory.generateHash(password)
+
         const newUser = new User({
             name: name,
             email: email,
             username: username.toLowerCase(),
-            password: password
+            password: hash_password
         })
 
         const createUser = await User.create(newUser)
