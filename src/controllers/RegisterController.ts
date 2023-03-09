@@ -14,7 +14,7 @@ export class RegisterController {
 
         if (!name || !email || !username || !password) throw new ResponseHttpError("Campos necessarios não informados.", 400)
 
-        const hash_password = PasswordFactory.generateHash(password)
+        const hash_password = await PasswordFactory.generateHash(password)
 
         const newUser = new User({
             name: name,
